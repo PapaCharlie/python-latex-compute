@@ -2,7 +2,7 @@ from setuptools import setup
 from texpy.__init__ import __version__ as VERSION
 
 setup(name='texpy',
-      version='VERSION,
+      version=VERSION,
       description='Executes TeX code',
       url='https://github.com/PapaCharlie/texpy',
       author='Paul Chesnais',

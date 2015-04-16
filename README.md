@@ -1,9 +1,10 @@
 # TeXPy
 Execute single line latex like wolfram would
 
+What you can do:
++ Compute integrals
+
 TODO:
-+ Definite Integrals
-+ Indefinite Integrals
-+ Definite Derivations
-+ Indefinite Derivations
-+ Fractions
++ Nested Integrals
++ Derivations
++ ~Fractions~

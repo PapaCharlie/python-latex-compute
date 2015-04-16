@@ -5,30 +5,60 @@ import re
 
 
 def sint(s):
-    f = float(s)
-    i = int(f)
-    return i if i == f else f
+    if s:
+        s = s.replace("(","").replace("{","").replace("}","").replace(")","")
+        f = float(s)
+        i = int(f)
+        return i if i == f else f
+
+def replace_frac(string):
+    frac = r'\dfrac' if r'\dfrac' in string else (r'\frac' if r'\frac' in string else None)
+    if frac:
+        s = string[string.find(frac)+len(frac):]
+        o = 0
+        for (i,c) in enumerate(s):
+            if c == '{':
+                o += 1
+            elif c == "}":
+                o -= 1
+            if o == 0:
+                num = s[1:i]
+                break
+        s = s[len(num)+2:]
+        for (i,c) in enumerate(s):
+            if c == '{':
+                o += 1
+            elif c == "}":
+                o -= 1
+            if o == 0:
+                denum = s[1:i]
+                break
+        string = string[:string.find(frac)] + "(" + num + ")/("+ denum + ")" + string[string.find(frac) + len(frac) + len(num) + 2 + len(denum) + 2:]
+        return replace_frac(string)
+    else:
+        return string
 
 
 def tex_integrals(string):
-    integ = (r'\int',r'\dint',r'\bigint')
+    string = replace_frac(string)
 
-    op = re.match("^\W*("+"|".join(integ)+")(_(\d)\^(\d)|\^(\d)_(\d))?(.*)d(.)", string)
+    integ = "|".join((r'\int',r'\dint',r'\bigint'))
+
+    d = "[{(]?-?\d[)}]?"
+    op = re.match("^\W*("+integ+")(_({d})\^({d})|\^({d})_({d}))?(.*)d(.)".format(d=d), string)
+
     if op:
-        print op.groups()
-        op = op.groups()
-        x = Symbol(op[7])
-        if op[1]:
-            up = sint(op[3]) or sint(op[4])
-            down = sint(op[2]) or sint(op[5])
-            return Integral(op[6],(x,down, up)).doit()
+        x = Symbol(op.group(8))
+        if op.group(2):
+            up = sint(op.group(4)) or sint(op.group(5))
+            down = sint(op.group(3)) or sint(op.group(6))
+            return Integral(op.group(7),(x,down, up)).doit()
         else:
-            return Integral(op[6],x)
+            return Integral(op.group(7),x)
 
 def plain_integrals(string):
     op = re.match("^\W*integrate (.*) from ((\d) to (\d))?", string)
     if op:
-        print op.groups()
         op = op.groups()
         x = sympify(op[0]).free_symbols.pop()
         if op[1]:
