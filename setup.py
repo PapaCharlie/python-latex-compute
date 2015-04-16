@@ -5,7 +5,9 @@ setup(name='texpy',
       description='Executes TeX code',
       url='https://github.com/PapaCharlie/texpy',
       author='Paul Chesnais',
-      author_email='paul.chesnais@gmail.com',
+      author_email='paul.chesnais @ gmail',
       license='MIT',
       packages=['texpy'],
-      zip_safe=False)
+      package_dir={'texpy':'texpy'},
+      entry_points={'console_scripts': ['texpy = texpy.cli:main',]},
+      )
