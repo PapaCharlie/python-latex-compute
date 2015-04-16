@@ -1,4 +1,4 @@
-# python-latex-compute
+# TeXPy
 Execute single line latex like wolfram would
 
 TODO:
