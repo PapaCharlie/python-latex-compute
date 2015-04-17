@@ -38,23 +38,31 @@ def replace_frac(string):
     else:
         return string
 
+# x, y, z = symbols("x y z")
 
+ds = None
 def tex_integrals(string):
-    string = replace_frac(string)
+    string = replace_frac(string.strip())
 
     integ = "|".join((r'\int',r'\dint',r'\bigint'))
 
     d = "[{(]?-?\d[)}]?"
     op = re.match("^\W*("+integ+")(_({d})\^({d})|\^({d})_({d}))?(.*)d(.)".format(d=d), string)
-
+    global ds
+    ds = op
     if op:
+        print op.groups()
         x = Symbol(op.group(8))
+        body = op.group(7)
+        inner = tex_integrals(body)
+        if inner:
+            body = inner.doit()
         if op.group(2):
             up = sint(op.group(4)) or sint(op.group(5))
             down = sint(op.group(3)) or sint(op.group(6))
-            return Integral(op.group(7),(x,down, up)).doit()
+            return Integral(body,(x,down, up)).doit()
         else:
-            return Integral(op.group(7),x)
+            return Integral(body,x)
 
 def plain_integrals(string):
     op = re.match("^\W*integrate (.*) from ((\d) to (\d))?", string)
