@@ -33,10 +33,6 @@ def raw(text):
         except KeyError: new_string+=char
     return new_string
 
-# k, m, n = symbols('k m n', integer=True)
-# f, g, h = symbols('f g h', cls=Function)
-
-
 def main():
     parser = ArgumentParser(description='Parse a LaTeX sting and attempt to compute a result.2')
     parser.add_argument('string', type=str, help='String to parse')

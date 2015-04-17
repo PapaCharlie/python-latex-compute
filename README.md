@@ -5,6 +5,6 @@ What you can do:
 + Compute integrals
 
 TODO:
-+ Nested Integrals
 + Derivations
++ ~~Nested Integrals~~
 + ~~Fractions~~
