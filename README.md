@@ -7,4 +7,4 @@ What you can do:
 TODO:
 + Nested Integrals
 + Derivations
-+ ~Fractions~
++ ~~Fractions~~
