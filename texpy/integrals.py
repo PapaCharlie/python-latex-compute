@@ -4,7 +4,7 @@ from sympy import Symbol, sympify, Integral, latex as to_latex, symbols
 import re
 from difflib import get_close_matches
 
-from utils import replace_frac, replace_exponents, string_to_int, fix_implicit_mult
+from utils import replace_frac, replace_exponents, string_to_int, fix_implicit_mult, to_power_of10
 
 
 def tex_integrals(string):
@@ -50,9 +50,11 @@ def plain_integrals(string):
             x = sympify(string).free_symbols.pop()
             return Integral(body,x).doit()
 
-def main(string, approx, latex):
+def main(string, approx, latex, sci):
     tex = tex_integrals(string) or plain_integrals(string)
     if tex:
+        if approx and sci:
+            return to_latex(to_power_of10(tex.n(5))) if latex else to_power_of10(tex.n(5))
         if approx:
             return to_latex(tex.n(5)) if latex else tex.n(5)
         else:

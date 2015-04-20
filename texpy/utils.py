@@ -2,6 +2,10 @@
 
 from sympy import Symbol
 from re import sub, findall, search
+from math import log
+
+def to_power_of10(num):
+    return num
 
 def replace_times(string):
     return string.replace(r"\times","*")

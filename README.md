@@ -7,8 +7,8 @@ What you can do:
 
 TODO:
 + Derivations
-+ Symbolic integral bounds
 + Non-integer integral bounds
++ ~~Symbolic integral bounds~~
 + ~~Fix implicit multiplications (3x or xy)~~
 + ~~Nested Integrals~~
 + ~~Fractions~~
