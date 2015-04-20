@@ -34,12 +34,12 @@ def raw(text):
     return new_string
 
 def main():
-    parser = ArgumentParser(description='Parse a LaTeX sting and attempt to compute a result.2')
-    parser.add_argument('string', type=str, help='String to parse')
+    parser = ArgumentParser(description='Parse a LaTeX sting and attempt to compute a result.')
     parser.add_argument('-a', action='store_true', help='Return exact or approximate value')
     parser.add_argument('-l', action='store_true', help='Return as plaintext or LaTeX')
+    parser.add_argument('string', type=str, help='String to parse', nargs='+')
     args = parser.parse_args()
-    parse(raw(args.string).strip(),**{"approx":args.a,"latex":args.l})
+    parse(raw(" ".join(args.string)).strip(),**{"approx":args.a,"latex":args.l})
 
 if __name__ == '__main__':
-  sys.exit(main())
+    sys.exit(main())
