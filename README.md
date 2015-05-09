@@ -7,7 +7,7 @@ What you can do:
 
 TODO:
 + Derivations
-+ Non-integer integral bounds
++ Non-integer integral bounds (most likely isn't going to happen honestly...)
 + ~~Symbolic integral bounds~~
 + ~~Fix implicit multiplications (3x or xy)~~
 + ~~Nested Integrals~~

@@ -8,7 +8,7 @@ def to_power_of10(num):
     return num
 
 def replace_times(string):
-    return string.replace(r"\times","*")
+    return string.replace(r"\times","*").replace(r"\cdot","*")
 
 def replace_left_right(string):
     return string.replace(r"\left","").replace(r"\right","")
